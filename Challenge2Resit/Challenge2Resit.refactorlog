@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="5572e7fd-d2b1-4971-b1fa-f09108bd71f8" ChangeDateTime="06/28/2018 23:31:39">
+    <Property Name="ElementName" Value="[dbo].[Procedure].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Procedure]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="OwnerID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f2e8350b-cd41-4e55-a8f5-fd5862a0c2cc" ChangeDateTime="06/28/2018 23:31:49">
+    <Property Name="ElementName" Value="[dbo].[Procedure].[OwnerID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Procedure]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProcedureID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="15d93b67-b72f-4f47-94d5-39a87930202d" ChangeDateTime="06/28/2018 23:32:27">
+    <Property Name="ElementName" Value="[dbo].[Owner].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Owner]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="OwnerID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="81109843-d446-4d1f-98ab-c8a657513fe1" ChangeDateTime="06/28/2018 23:42:30">
+    <Property Name="ElementName" Value="[dbo].[Pet].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Pet]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="72c42e41-9330-4ab9-b7e6-be468aed52b1" ChangeDateTime="06/28/2018 23:44:31">
+    <Property Name="ElementName" Value="[dbo].[Treatment].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Treatment]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PetName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4de36a20-b46d-4faf-9720-f14716489fc8" ChangeDateTime="06/28/2018 23:45:23">
+    <Property Name="ElementName" Value="[dbo].[Procedure].[Rabies Vaccination]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Procedure]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Descriptiojn" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1ae7ad95-84f5-4db4-9b26-f367d1a86eec" ChangeDateTime="06/28/2018 23:47:16">
+    <Property Name="ElementName" Value="[dbo].[Procedure].[Descriptiojn]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Procedure]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Description" />
+  </Operation>
+</Operations>
