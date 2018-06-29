@@ -2,118 +2,117 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web;
+using System.Web.Mvc;
 using Challenge2ResitAPI.Models;
 
 namespace Challenge2ResitAPI.Controllers
 {
-    public class ProceduresController : ApiController
+    public class ProceduresController : Controller
     {
         private Entities db = new Entities();
 
-        // GET: api/Procedures
-        public IQueryable<Procedure> GetProcedures()
+        // GET: Procedures
+        public ActionResult Index()
         {
-            return db.Procedures;
+            return View(db.Procedures.ToList());
         }
 
-        // GET: api/Procedures/5
-        [ResponseType(typeof(Procedure))]
-        public IHttpActionResult GetProcedure(int id)
+        // GET: Procedures/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Procedure procedure = db.Procedures.Find(id);
             if (procedure == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(procedure);
+            return View(procedure);
         }
 
-        // PUT: api/Procedures/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutProcedure(int id, Procedure procedure)
+        // GET: Procedures/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            return View();
+        }
 
-            if (id != procedure.ProcedureID)
+        // POST: Procedures/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ProcedureID,Description,Price")] Procedure procedure)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest();
-            }
-
-            db.Entry(procedure).State = EntityState.Modified;
-
-            try
-            {
+                db.Procedures.Add(procedure);
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProcedureExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToAction("Index");
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return View(procedure);
         }
 
-        // POST: api/Procedures
-        [ResponseType(typeof(Procedure))]
-        public IHttpActionResult PostProcedure(Procedure procedure)
+        // GET: Procedures/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            db.Procedures.Add(procedure);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (ProcedureExists(procedure.ProcedureID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = procedure.ProcedureID }, procedure);
-        }
-
-        // DELETE: api/Procedures/5
-        [ResponseType(typeof(Procedure))]
-        public IHttpActionResult DeleteProcedure(int id)
-        {
             Procedure procedure = db.Procedures.Find(id);
             if (procedure == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            return View(procedure);
+        }
 
+        // POST: Procedures/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ProcedureID,Description,Price")] Procedure procedure)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(procedure).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(procedure);
+        }
+
+        // GET: Procedures/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Procedure procedure = db.Procedures.Find(id);
+            if (procedure == null)
+            {
+                return HttpNotFound();
+            }
+            return View(procedure);
+        }
+
+        // POST: Procedures/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Procedure procedure = db.Procedures.Find(id);
             db.Procedures.Remove(procedure);
             db.SaveChanges();
-
-            return Ok(procedure);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -123,11 +122,6 @@ namespace Challenge2ResitAPI.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool ProcedureExists(int id)
-        {
-            return db.Procedures.Count(e => e.ProcedureID == id) > 0;
         }
     }
 }

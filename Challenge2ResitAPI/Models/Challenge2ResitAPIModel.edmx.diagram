@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ff8ad43f06434b9d96e3a8070eccfdca" Name="Diagram1">
+      <Diagram DiagramId="95ded1b70a4d44c98057daa71b00654a" Name="Diagram1">
         <EntityTypeShape EntityType="challenge2resitModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="challenge2resitModel.Owner" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="challenge2resitModel.Pet" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />

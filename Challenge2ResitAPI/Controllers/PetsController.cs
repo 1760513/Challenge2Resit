@@ -2,118 +2,122 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web;
+using System.Web.Mvc;
 using Challenge2ResitAPI.Models;
 
 namespace Challenge2ResitAPI.Controllers
 {
-    public class PetsController : ApiController
+    public class PetsController : Controller
     {
         private Entities db = new Entities();
 
-        // GET: api/Pets
-        public IQueryable<Pet> GetPets()
+        // GET: Pets
+        public ActionResult Index()
         {
-            return db.Pets;
+            var pets = db.Pets.Include(p => p.Owner);
+            return View(pets.ToList());
         }
 
-        // GET: api/Pets/5
-        [ResponseType(typeof(Pet))]
-        public IHttpActionResult GetPet(int id)
+        // GET: Pets/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Pet pet = db.Pets.Find(id);
             if (pet == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(pet);
+            return View(pet);
         }
 
-        // PUT: api/Pets/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutPet(int id, Pet pet)
+        // GET: Pets/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            ViewBag.OwnerID = new SelectList(db.Owners, "OwnerID", "Surname");
+            return View();
+        }
 
-            if (id != pet.PetID)
+        // POST: Pets/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "PetName,Type,OwnerID,PetID")] Pet pet)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest();
-            }
-
-            db.Entry(pet).State = EntityState.Modified;
-
-            try
-            {
+                db.Pets.Add(pet);
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PetExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToAction("Index");
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            ViewBag.OwnerID = new SelectList(db.Owners, "OwnerID", "Surname", pet.OwnerID);
+            return View(pet);
         }
 
-        // POST: api/Pets
-        [ResponseType(typeof(Pet))]
-        public IHttpActionResult PostPet(Pet pet)
+        // GET: Pets/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            db.Pets.Add(pet);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (PetExists(pet.PetID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = pet.PetID }, pet);
-        }
-
-        // DELETE: api/Pets/5
-        [ResponseType(typeof(Pet))]
-        public IHttpActionResult DeletePet(int id)
-        {
             Pet pet = db.Pets.Find(id);
             if (pet == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            ViewBag.OwnerID = new SelectList(db.Owners, "OwnerID", "Surname", pet.OwnerID);
+            return View(pet);
+        }
 
+        // POST: Pets/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "PetName,Type,OwnerID,PetID")] Pet pet)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(pet).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.OwnerID = new SelectList(db.Owners, "OwnerID", "Surname", pet.OwnerID);
+            return View(pet);
+        }
+
+        // GET: Pets/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Pet pet = db.Pets.Find(id);
+            if (pet == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pet);
+        }
+
+        // POST: Pets/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Pet pet = db.Pets.Find(id);
             db.Pets.Remove(pet);
             db.SaveChanges();
-
-            return Ok(pet);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -123,11 +127,6 @@ namespace Challenge2ResitAPI.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool PetExists(int id)
-        {
-            return db.Pets.Count(e => e.PetID == id) > 0;
         }
     }
 }

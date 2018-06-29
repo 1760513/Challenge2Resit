@@ -2,118 +2,117 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web;
+using System.Web.Mvc;
 using Challenge2ResitAPI.Models;
 
 namespace Challenge2ResitAPI.Controllers
 {
-    public class OwnersController : ApiController
+    public class OwnersController : Controller
     {
         private Entities db = new Entities();
 
-        // GET: api/Owners
-        public IQueryable<Owner> GetOwners()
+        // GET: Owners
+        public ActionResult Index()
         {
-            return db.Owners;
+            return View(db.Owners.ToList());
         }
 
-        // GET: api/Owners/5
-        [ResponseType(typeof(Owner))]
-        public IHttpActionResult GetOwner(int id)
+        // GET: Owners/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Owner owner = db.Owners.Find(id);
             if (owner == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(owner);
+            return View(owner);
         }
 
-        // PUT: api/Owners/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutOwner(int id, Owner owner)
+        // GET: Owners/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            return View();
+        }
 
-            if (id != owner.OwnerID)
+        // POST: Owners/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "OwnerID,Surname,GivenName,Phone")] Owner owner)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest();
-            }
-
-            db.Entry(owner).State = EntityState.Modified;
-
-            try
-            {
+                db.Owners.Add(owner);
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OwnerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToAction("Index");
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return View(owner);
         }
 
-        // POST: api/Owners
-        [ResponseType(typeof(Owner))]
-        public IHttpActionResult PostOwner(Owner owner)
+        // GET: Owners/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            db.Owners.Add(owner);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (OwnerExists(owner.OwnerID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = owner.OwnerID }, owner);
-        }
-
-        // DELETE: api/Owners/5
-        [ResponseType(typeof(Owner))]
-        public IHttpActionResult DeleteOwner(int id)
-        {
             Owner owner = db.Owners.Find(id);
             if (owner == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            return View(owner);
+        }
 
+        // POST: Owners/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "OwnerID,Surname,GivenName,Phone")] Owner owner)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(owner).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(owner);
+        }
+
+        // GET: Owners/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Owner owner = db.Owners.Find(id);
+            if (owner == null)
+            {
+                return HttpNotFound();
+            }
+            return View(owner);
+        }
+
+        // POST: Owners/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Owner owner = db.Owners.Find(id);
             db.Owners.Remove(owner);
             db.SaveChanges();
-
-            return Ok(owner);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -123,11 +122,6 @@ namespace Challenge2ResitAPI.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool OwnerExists(int id)
-        {
-            return db.Owners.Count(e => e.OwnerID == id) > 0;
         }
     }
 }
