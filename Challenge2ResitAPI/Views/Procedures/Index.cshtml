@@ -29,9 +29,10 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProcedureID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProcedureID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProcedureID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProcedureID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProcedureID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProcedureID }) |
+            @Html.ActionLink("Treatments", "Treatments", new { id = item.ProcedureID })
         </td>
     </tr>
 }

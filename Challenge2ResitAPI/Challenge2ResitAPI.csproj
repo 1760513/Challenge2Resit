@@ -264,6 +264,12 @@
     <Content Include="Views\Treatments\Details.cshtml" />
     <Content Include="Views\Treatments\Edit.cshtml" />
     <Content Include="Views\Treatments\Index.cshtml" />
+    <Content Include="Views\Procedures\Treatments.cshtml" />
+    <Content Include="Views\Treatments1\Create.cshtml" />
+    <Content Include="Views\Treatments1\Delete.cshtml" />
+    <Content Include="Views\Treatments1\Details.cshtml" />
+    <Content Include="Views\Treatments1\Edit.cshtml" />
+    <Content Include="Views\Treatments1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

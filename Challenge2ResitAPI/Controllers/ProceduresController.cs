@@ -35,6 +35,17 @@ namespace Challenge2ResitAPI.Controllers
             return View(procedure);
         }
 
+        public ActionResult Treatments(int? id)
+        {
+            var treatments = db.Treatments.Include(b => b.Procedure);
+            if (treatments == null)
+            {
+                return HttpNotFound();
+            }
+            treatments = treatments.Where(x => x.ProcedureID == id);
+            return View(treatments.ToList());
+        }
+
         // GET: Procedures/Create
         public ActionResult Create()
         {
