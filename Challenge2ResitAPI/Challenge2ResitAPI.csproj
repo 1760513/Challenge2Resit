@@ -219,6 +219,7 @@
     <Content Include="Models\Challenge2ResitAPIModel.edmx.diagram">
       <DependentUpon>Challenge2ResitAPIModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Challenge2ResitAPI20180629034347 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
