@@ -37,11 +37,11 @@ INSERT INTO [PET] (PETID, PETNAME, TYPE, OWNERID) VALUES
 (004, 'Buster', 'Dog', 3),
 (005, 'Pooper', 'Dog', 3);
 
-INSERT INTO [TREATMENT] (PETID, PETNAME, OWNERID, PROCEDUREID, DATE, NOTES, PRICE) VALUES
-(001, 'Buster', 1, 01, '2017-06-20', 'Routine Vaccination', 22.00),
-(002, 'Buster', 1, 01, '2018-05-15', 'Booster Shot', 24.00),
-(003, 'Fluffy', 1, 10, '2018-05-10', 'Wounds sustained in apparent cat fight', 30.00),
-(004, 'Stew', 2, 10, '2018-05-10', 'Wounds sustained during attempt to cook the stew', 30.00),
-(005, 'Pooper', 3, 05, '2018-05-18', 'Routine Test', 25.00);
+INSERT INTO [TREATMENT] (treatmentID, PETID, PETNAME, OWNERID, PROCEDUREID, DATE, NOTES, PRICE) VALUES
+(1, 001, 'Buster', 1, 01, '2017-06-20', 'Routine Vaccination', 22.00),
+(4,001, 'Buster', 1, 01, '2018-05-15', 'Booster Shot', 24.00),
+(2,002, 'Fluffy', 1, 10, '2018-05-10', 'Wounds sustained in apparent cat fight', 30.00),
+(3, 003, 'Stew', 2, 10, '2018-05-10', 'Wounds sustained during attempt to cook the stew', 30.00),
+(5,005, 'Pooper', 3, 05, '2018-05-18', 'Routine Test', 25.00);
 
 END;
