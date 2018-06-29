@@ -7,8 +7,8 @@
     [Notes] NVARCHAR(MAX) NOT NULL, 
     [Price] MONEY NOT NULL,
     [PetID] INT NOT NULL, 
-    PRIMARY KEY (PetID, ProcedureID),
-	--CONSTRAINT FK_OwnerID FOREIGN KEY (OwnerID) REFERENCES [Owner](OwnerID),
+    PRIMARY KEY (PetID, OwnerID, ProcedureID),
+	CONSTRAINT FK_OwnerID FOREIGN KEY (OwnerID) REFERENCES [Owner](OwnerID),
 	CONSTRAINT FK_ProcedureID FOREIGN KEY (ProcedureID) REFERENCES [Procedure](ProcedureID),
 	CONSTRAINT FK_PetID FOREIGN KEY (PetID) REFERENCES [Pet](PetID)
 )
