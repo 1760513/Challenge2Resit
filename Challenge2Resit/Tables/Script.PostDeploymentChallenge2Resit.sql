@@ -25,10 +25,10 @@ INSERT INTO [PROCEDURE] (PROCEDUREID, DESCRIPTION, PRICE) VALUES
 (05, 'Heart Worm Test', 25.00),
 (08, 'Tetnus Vaccination', 17.00);
 
-INSERT INTO [OWNER] (OWNERID, SURNAME, GIVENNAME, PHONE) VALUES
-(1, 'Sinatra', 'Frank', 400111222),
-(2, 'Ellington', 'Duke', 400222333),
-(3, 'Fitzgerald', 'Ella', 400333444);
+INSERT INTO [OWNER] (OWNERID, SURNAME, GIVENNAME, PHONE, FAVOURITECAPTAIN) VALUES
+(1, 'Sinatra', 'Frank', 400111222, 'Kirk'),
+(2, 'Ellington', 'Duke', 400222333, 'Picard'),
+(3, 'Fitzgerald', 'Ella', 400333444, 'Sisko');
 
 INSERT INTO [PET] (PETID, PETNAME, TYPE, OWNERID) VALUES
 (001, 'Buster', 'Dog', 1),
