@@ -30,18 +30,18 @@ INSERT INTO [OWNER] (OWNERID, SURNAME, GIVENNAME, PHONE) VALUES
 (2, 'Ellington', 'Duke', 400222333),
 (3, 'Fitzgerald', 'Ella', 400333444);
 
-INSERT INTO [PET] (PETNAME, TYPE, OWNERID) VALUES
-('Buster', 'Dog', 1),
-('Fluffy', 'Cat', 1),
-('Stew', 'Rabbit', 2),
-('Buster', 'Dog', 3),
-('Pooper', 'Dog', 3);
+INSERT INTO [PET] (PETID, PETNAME, TYPE, OWNERID) VALUES
+(001, 'Buster', 'Dog', 1),
+(002, 'Fluffy', 'Cat', 1),
+(003, 'Stew', 'Rabbit', 2),
+(004, 'Buster', 'Dog', 3),
+(005, 'Pooper', 'Dog', 3);
 
-INSERT INTO [TREATMENT] (PETNAME, OWNERID, PROCEDUREID, DATE, NOTES, PRICE) VALUES
-('Buster', 1, 01, '2017-06-20', 'Routine Vaccination', 22.00),
-('Buster', 1, 01, '2018-05-15', 'Booster Shot', 24.00),
-('Fluffy', 1, 10, '2018-05-10', 'Wounds sustained in apparent cat fight', 30.00),
-('Stew', 2, 10, '2018-05-10', 'Wounds sustained during attempt to cook the stew', 30.00),
-('Pooper', 3, 05, '2018-05-18', 'Routine Test', 25.00);
+INSERT INTO [TREATMENT] (PETID, PETNAME, OWNERID, PROCEDUREID, DATE, NOTES, PRICE) VALUES
+(001, 'Buster', 1, 01, '2017-06-20', 'Routine Vaccination', 22.00),
+(002, 'Buster', 1, 01, '2018-05-15', 'Booster Shot', 24.00),
+(003, 'Fluffy', 1, 10, '2018-05-10', 'Wounds sustained in apparent cat fight', 30.00),
+(004, 'Stew', 2, 10, '2018-05-10', 'Wounds sustained during attempt to cook the stew', 30.00),
+(005, 'Pooper', 3, 05, '2018-05-18', 'Routine Test', 25.00);
 
 END;
