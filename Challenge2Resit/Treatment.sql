@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[Treatment]
 (
-	[PetName] INT NOT NULL PRIMARY KEY, 
-    [OwnerID] NVARCHAR(50) NOT NULL, 
-    [ProcedureID] NCHAR(10) NOT NULL, 
-    [Date] NCHAR(10) NOT NULL, 
-    [Notes] NCHAR(10) NOT NULL, 
-    [Price] NCHAR(10) NOT NULL
+	[PetName] NVARCHAR(50) NOT NULL PRIMARY KEY, 
+    [OwnerID] INT NOT NULL, 
+    [ProcedureID] NVARCHAR(MAX) NOT NULL, 
+    [Date] DATE NOT NULL, 
+    [Notes] NVARCHAR(MAX) NOT NULL, 
+    [Price] MONEY NOT NULL
 )
