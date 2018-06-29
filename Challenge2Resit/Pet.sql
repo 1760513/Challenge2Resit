@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Pet]
 (
 	[Name] NVARCHAR(50) NOT NULL PRIMARY KEY, 
-    [Type] NCHAR(10) NULL, 
-    [OwnerID] INT NULL
+    [Type] NCHAR(10) NOT NULL, 
+    [OwnerID] INT NOT NULL
+	CONSTRAINT FK_OwnerID_Pet FOREIGN KEY (OwnerID) REFERENCES [Owner](OwnerID)
 )

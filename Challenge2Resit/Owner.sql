@@ -3,5 +3,5 @@
 	[OwnerID] INT NOT NULL PRIMARY KEY, 
     [Surname] NVARCHAR(50) NOT NULL, 
     [GivenName] NVARCHAR(50) NOT NULL, 
-    [Phone] INT NULL
+    [Phone] INT NOT NULL
 )
